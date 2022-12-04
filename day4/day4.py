@@ -7,6 +7,6 @@ with open("input.txt", "r") as file:
         elf2 = set(map(lambda x: int(x), range(int(i[1][0]), int(i[1][1])+1)))
         if elf1.issubset(elf2) or elf2.issubset(elf1):
             counter1 += 1
-        if not elf1.isdisjoint(elf2) or not elf2.isdisjoint(elf1):
+        if not elf1.isdisjoint(elf2):
             counter2 += 1
     print(counter1, counter2)
