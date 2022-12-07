@@ -1,4 +1,6 @@
+import time
 from dataclasses import dataclass
+from functools import reduce
 def parse_input(filename):
     with open(filename, "r") as file:
         data = [[e.split(" ") for e in d] for d in [[z.strip() for z in y if z != ""] for y in [x.split("\n") for x in file.read().split("$")]] if d != list()]
@@ -7,9 +9,7 @@ class Folder:
     def __init__(self, name: str, parent):
         self.name = name
         self.parent = parent
-        self.subfolders = []
-        self.files = []
-        self.output = []
+        self.subfolders, self.files, self.output = [],[],[]
     def AddSubFolder(self, name: str):
         if name not in self.get_sub_names():
             subFolder = Folder(name, self)
@@ -26,15 +26,9 @@ class Folder:
     def getParent(self):
         return self.parent
     def get_sub_names(self):
-        names = []
-        for n in self.subfolders:
-            names.append(n.name)
-        return names
+        return [n.name for n in self.subfolders]
     def get_file_names(self):
-        names = []
-        for n in self.files:
-            names.append(n.name)
-        return names
+        return [n.name for n in self.files]
     def getSize(self):
         temp_size = 0
         for file in self.files:
@@ -65,9 +59,9 @@ def commands(data):
                         current_folder.AddSubFolder(j[1])
                     else:
                         current_folder.AddFile(j[1], int(j[0]))
-    while current_folder.parent != None:
-        current_folder = current_folder.parent
+    while current_folder.parent != None: current_folder = current_folder.parent
     return current_folder
+time1 = time.time()
 pam = commands(parse_input("input.txt"))
 ans_list = list()
 def getSum(folder: Folder):
@@ -80,3 +74,4 @@ print(sum([v for v in ans_list if v <= 100000]))
 # part2
 unused = 70000000 - ans_list[0]
 print(min(filter(lambda x: x + unused >= 30000000, ans_list)))
+print(time.time()-time1)
