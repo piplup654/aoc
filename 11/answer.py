@@ -92,11 +92,11 @@ def part1(monkeys: list[Monkey], rounds):
 def MonkeyBussinessLevel(monkeysAfterRounds):
     inspected = list()
     for i in monkeysAfterRounds:
-        print(i)
         inspected.append(i.items_inspected)
     inspected = sorted(inspected)[::-1]
     return inspected[0] * inspected[1]
 
 
 input = parseInput("input.txt")
+print(MonkeyBussinessLevel(part1(input[0], 20)))
 print(MonkeyBussinessLevel(part1(input[1], 10000)))
