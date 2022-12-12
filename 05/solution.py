@@ -1,7 +1,6 @@
 ## advent of code 2022
 ## https://adventofcode.com/2022
 ## day 05
-
 def parse_input(lines):
     with open(lines, "r") as file:
         data1 = file.read().split("\n\n")

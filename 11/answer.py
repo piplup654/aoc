@@ -3,7 +3,6 @@ import numpy as np
 divisors = [2, 17, 7, 11, 19, 5, 13, 3]
 divisors = np.product(divisors)
 
-
 class Monkey:
     def __init__(self, data: list[str], p: int) -> None:
         self.items = list()
@@ -23,10 +22,8 @@ class Monkey:
         self.divisible = [int(data[2].split()[-1])]
         self.divisible.append(int(data[3].split()[-1]))
         self.divisible.append(int(data[4].split()[-1]))
-
         self.items_inspected = 0
         self.p = p
-
     def AddItem(self, itemToAdd) -> None:
         self.items.append(itemToAdd)
 
