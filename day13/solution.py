@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from functools import cmp_to_key
 def parseInput(filename):
     with open(filename, "r") as f:
         data = f.read().strip().split("\n\n")
@@ -47,5 +48,17 @@ def part2(data):
         elif handler(p, [[6]]) == 1:
             position_2 += 1
     return position_1 * position_2
+def part2_2(data):
+    flatenned_data = [item for sublist in data for item in sublist]
+    flatenned_data.append([[2]])
+    flatenned_data.append([[6]])
+    flatenned_data = sorted(flatenned_data, key=cmp_to_key(handler), reverse=True)
+    ans = list()
+    for index, i in enumerate(flatenned_data):
+        if i == [[2]]:
+            ans.append(index+1)
+        if i == [[6]]:
+            ans.append(index+1)
+    return ans[0]*ans[1]
 inp = parseInput("input.txt")
-print(part1(inp), part2(inp))
+print(part1(inp), part2(inp), part2_2(inp))
